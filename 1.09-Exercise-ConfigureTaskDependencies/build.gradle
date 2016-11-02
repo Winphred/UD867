@@ -34,37 +34,54 @@
 */
 
 task brew {
+
     doLast {
         println "Brewing. Drip, drip, drip."
     }
 }
 
 task pour {
-    doLast {
+
+    dependsOn "brew"
+
+    doLast {        
         println "Pouring. Glug, glug, glug."
     }
 }
 
 task addSweetener {
+
+    dependsOn "pour"
+    finalizedBy "drink"
+
     doLast {
         println "Adding sweetener. Stir, stir, stir."
     }
 }
 
 task drink {
-    doLast {
+
+    dependsOn "pour"
+
+    doLast {        
         println "Drinking. Gulp, gulp, gulp."
     }
 }
 
 task blackCoffee {
-    doLast {
+
+    dependsOn "drink"
+
+    doLast {        
         println "Mmmm, bitter! just how I like it."
     }
 }
 
 task sweetCoffee {
-    doLast {
+
+   dependsOn "addSweetener"
+
+    doLast {        
         println "Mmmm, sweet! just how I like it."
     }
 }
